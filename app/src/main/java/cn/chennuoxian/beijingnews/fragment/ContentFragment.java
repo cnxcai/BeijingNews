@@ -12,8 +12,16 @@ import androidx.viewpager.widget.ViewPager;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.util.ArrayList;
+
 import cn.chennuoxian.beijingnews.R;
 import cn.chennuoxian.beijingnews.base.BaseFragment;
+import cn.chennuoxian.beijingnews.base.BasePager;
+import cn.chennuoxian.beijingnews.pager.GovaffairPager;
+import cn.chennuoxian.beijingnews.pager.HomePager;
+import cn.chennuoxian.beijingnews.pager.NewsCenterPager;
+import cn.chennuoxian.beijingnews.pager.SettingPager;
+import cn.chennuoxian.beijingnews.pager.SmartServicePager;
 import cn.chennuoxian.beijingnews.utils.LogUtil;
 
 public class ContentFragment extends BaseFragment {
@@ -22,6 +30,7 @@ public class ContentFragment extends BaseFragment {
     @ViewInject(R.id.rg_main)
     private RadioGroup rg_main;
 
+    private ArrayList<BasePager> basePagers;
 
     @Override
     public View initView() {
@@ -38,6 +47,13 @@ public class ContentFragment extends BaseFragment {
     public void initData() {
         super.initData();
         LogUtil.e("正文Fragment数据被初始化了");
+
+        basePagers=new ArrayList<>();
+        basePagers.add(new HomePager(context));
+        basePagers.add(new NewsCenterPager(context));
+        basePagers.add(new SmartServicePager(context));
+        basePagers.add(new GovaffairPager(context));
+        basePagers.add(new SettingPager(context));
 
         rg_main.check(R.id.rb_home);
     }
