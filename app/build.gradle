@@ -27,4 +27,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':SlidingMenu_library')
+    implementation project(path: ':xutils')
+    //implementation 'org.xutils:xutils:3.8.3'
 }

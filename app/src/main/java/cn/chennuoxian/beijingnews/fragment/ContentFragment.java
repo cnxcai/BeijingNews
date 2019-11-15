@@ -9,12 +9,17 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
 import cn.chennuoxian.beijingnews.R;
 import cn.chennuoxian.beijingnews.base.BaseFragment;
 import cn.chennuoxian.beijingnews.utils.LogUtil;
 
 public class ContentFragment extends BaseFragment {
+    @ViewInject(R.id.viewpager)
     private ViewPager viewPager;
+    @ViewInject(R.id.rg_main)
     private RadioGroup rg_main;
 
 
@@ -22,8 +27,10 @@ public class ContentFragment extends BaseFragment {
     public View initView() {
         LogUtil.e("正文Fragment视图被初始化了");
         View view=View.inflate(context, R.layout.content_fragment,null);
-        viewPager=(ViewPager)view.findViewById(R.id.viewpager);
-        rg_main=(RadioGroup)view.findViewById(R.id.rg_main);
+//      viewPager=(ViewPager)view.findViewById(R.id.viewpager);
+//      g_main=(RadioGroup)view.findViewById(R.id.rg_main);
+        //把视图弄到框架
+        x.view().inject(this,view);
         return view;
     }
 
