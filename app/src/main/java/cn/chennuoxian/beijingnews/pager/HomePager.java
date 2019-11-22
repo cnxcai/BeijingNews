@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import cn.chennuoxian.beijingnews.base.BasePager;
+import cn.chennuoxian.beijingnews.utils.LogUtil;
 
 public class HomePager extends BasePager {
     public HomePager(Context context) {
@@ -15,6 +16,7 @@ public class HomePager extends BasePager {
     @Override
     public void initData() {
         super.initData();
+        LogUtil.e("主页面数据被初始化..");
         tv_title.setText("主页面");
         TextView textView=new TextView(context);
         textView.setGravity(Gravity.CENTER);

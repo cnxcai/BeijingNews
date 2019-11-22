@@ -35,7 +35,7 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setSecondaryMenu(R.layout.activity_rightmenu);
 
         //设置显示的模式,右侧菜单+主页，左侧菜单+主页面+右侧菜单；主页面+右侧菜单
-        slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);
+        slidingMenu.setMode(SlidingMenu.LEFT);
 
         //设置滑动模式：滑动边缘，全屏滑动，不可以滑动
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);

@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import cn.chennuoxian.beijingnews.base.BasePager;
+import cn.chennuoxian.beijingnews.utils.LogUtil;
 
 public class GovaffairPager extends BasePager {
     public GovaffairPager(Context context) {
@@ -15,6 +16,7 @@ public class GovaffairPager extends BasePager {
     @Override
     public void initData() {
         super.initData();
+        LogUtil.e("政要指南数据被初始化..");
         tv_title.setText("政要指南");
         TextView textView=new TextView(context);
         textView.setGravity(Gravity.CENTER);
