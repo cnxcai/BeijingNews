@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import cn.chennuoxian.beijingnews.R;
 import cn.chennuoxian.beijingnews.activity.MainActivity;
+import cn.chennuoxian.beijingnews.adapter.ContentFragmentAdapter;
 import cn.chennuoxian.beijingnews.base.BaseFragment;
 import cn.chennuoxian.beijingnews.base.BasePager;
 import cn.chennuoxian.beijingnews.pager.GovaffairPager;
@@ -62,7 +63,7 @@ public class ContentFragment extends BaseFragment {
         basePagers.add(new GovaffairPager(context));
         basePagers.add(new SettingPager(context));
 
-        viewPager.setAdapter(new ContentFragmentAdapter());
+        viewPager.setAdapter(new ContentFragmentAdapter(basePagers));
 
         rg_main.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
 
@@ -127,29 +128,4 @@ public class ContentFragment extends BaseFragment {
         mainActivity.getSlidingMenu().setTouchModeAbove(touchmodeFullscreen);
     }
 
-    class ContentFragmentAdapter extends PagerAdapter{
-
-        @Override
-        public int getCount() {
-            return basePagers.size();
-        }
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            BasePager basePager=basePagers.get(position);//各个页面的实例
-            View rootView=basePager.rootView;//各个子页面
-            //basePager.initData();//初始化数据
-            container.addView(rootView);
-            return rootView;
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-            return view ==object;
-        }
-        @Override
-        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            container.removeView((View) object);
-        }
-    }
 }

@@ -24,6 +24,19 @@ public class MainActivity extends SlidingFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initSlidingMenu();
+
+        //初始化fragment
+        initFragment();
+
+        if(NavigationBarUtil.hasNavigationBar(this)){
+            NavigationBarUtil.initActivity(findViewById(android.R.id.content));
+        }
+
+    }
+
+    private void initSlidingMenu(){
         //设置主页面
         setContentView(R.layout.activity_main);
 
@@ -41,15 +54,7 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         //设置主页占据的宽度
-        slidingMenu.setBehindOffset(DensityUtil.dip2px(MainActivity.this,200));
-
-        //初始化fragment
-        initFragment();
-
-        if(NavigationBarUtil.hasNavigationBar(this)){
-            NavigationBarUtil.initActivity(findViewById(android.R.id.content));
-        }
-
+        slidingMenu.setBehindOffset(DensityUtil.dip2px(MainActivity.this,250));
     }
 
     private void initFragment() {
@@ -65,5 +70,9 @@ public class MainActivity extends SlidingFragmentActivity {
 
         //getSupportFragmentManager().beginTransaction().replace(R.id.fl_main_content,new ContentFragment(), MAIN_CONTENT_TAG).replace(R.id.fl_leftmenu,new LeftmenuFragment(), LEFTMENU_TAG).commit();
 
+    }
+    //得到左侧菜单
+    public LeftmenuFragment getLeftmenuFragment() {
+        return (LeftmenuFragment) getSupportFragmentManager().findFragmentByTag(LEFTMENU_TAG);
     }
 }
