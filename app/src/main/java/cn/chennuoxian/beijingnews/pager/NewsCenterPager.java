@@ -12,18 +12,26 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.chennuoxian.beijingnews.activity.MainActivity;
 import cn.chennuoxian.beijingnews.base.BasePager;
+import cn.chennuoxian.beijingnews.base.MenuDetailBasePager;
 import cn.chennuoxian.beijingnews.domain.NewsCenterPagerBean;
 import cn.chennuoxian.beijingnews.fragment.LeftmenuFragment;
+import cn.chennuoxian.beijingnews.menudetailpager.InteracMenuDetailPager;
+import cn.chennuoxian.beijingnews.menudetailpager.NewsMenuDetailPager;
+import cn.chennuoxian.beijingnews.menudetailpager.PhotosMenuDetailPager;
+import cn.chennuoxian.beijingnews.menudetailpager.TopicMenuDetailPager;
 import cn.chennuoxian.beijingnews.utils.Constants;
 import cn.chennuoxian.beijingnews.utils.LogUtil;
 
 public class NewsCenterPager extends BasePager {
 
     private List<NewsCenterPagerBean.DataBean> data;
+
+    private ArrayList<MenuDetailBasePager> detailBasePagers;
 
     public NewsCenterPager(Context context) {
         super(context);
@@ -88,14 +96,32 @@ public class NewsCenterPager extends BasePager {
         MainActivity mainActivity=(MainActivity)context;
         //得到左侧菜单
         LeftmenuFragment leftmenuFragment=mainActivity.getLeftmenuFragment();
+        //添加详情页面
+        detailBasePagers=new ArrayList<>();
+        detailBasePagers.add(new NewsMenuDetailPager(context));
+        detailBasePagers.add(new TopicMenuDetailPager(context));
+        detailBasePagers.add(new PhotosMenuDetailPager(context));
+        detailBasePagers.add(new InteracMenuDetailPager(context));
+
         //把数据传递给左侧
         leftmenuFragment.setData(data);
-
     }
 //解析json数据，1，使用系统的API解析json,2,使用第三方框架，例如Gson
     private NewsCenterPagerBean parsedJson(String json) {
         /*Gson gson=new Gson();
         NewsCenterPagerBean bean=gson.fromJson(json,NewsCenterPagerBean.class);*/
         return new Gson().fromJson(json,NewsCenterPagerBean.class);
+    }
+//切换详情页面
+    public void swichPager(int position) {
+        //1.设置标题
+        tv_title.setText(data.get(position).getTitle());
+        //2.移除内容
+        fl_content.removeAllViews();
+        //3.添加新内容
+        MenuDetailBasePager detailBasePager=detailBasePagers.get(position);
+        View rootView=detailBasePager.rootView;
+        detailBasePager.initData();
+        fl_content.addView(rootView);
     }
 }

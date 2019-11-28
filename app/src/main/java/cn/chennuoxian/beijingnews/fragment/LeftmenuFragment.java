@@ -14,6 +14,7 @@ import cn.chennuoxian.beijingnews.R;
 import cn.chennuoxian.beijingnews.activity.MainActivity;
 import cn.chennuoxian.beijingnews.base.BaseFragment;
 import cn.chennuoxian.beijingnews.domain.NewsCenterPagerBean;
+import cn.chennuoxian.beijingnews.pager.NewsCenterPager;
 import cn.chennuoxian.beijingnews.utils.DensityUtil;
 import cn.chennuoxian.beijingnews.utils.LogUtil;
 
@@ -45,9 +46,18 @@ public class LeftmenuFragment extends BaseFragment {
                 MainActivity mainActivity= (MainActivity) context;
                 mainActivity.getSlidingMenu().toggle();
                 //3.切换到对应的详情页面:新闻详情页，专题详情页，图组详情页面，互动详情页面
+                swichPager(prePosition);
+
             }
         });
         return listView;
+    }
+//根据位置切换不同详情页面
+    private void swichPager(int position) {
+        MainActivity mainActivity= (MainActivity) context;
+        ContentFragment contentFragment=mainActivity.getContentFragment();
+        NewsCenterPager newsCenterPager=contentFragment.getNewsCenterPager();
+        newsCenterPager.swichPager(position);
     }
 
     @Override
@@ -64,6 +74,8 @@ public class LeftmenuFragment extends BaseFragment {
         adapter=new LeftmenuFragmentAdapter();
         //设置适配器
         listView.setAdapter(adapter);
+        //设置默认页面
+        swichPager(prePosition);
     }
 
     class LeftmenuFragmentAdapter extends BaseAdapter{

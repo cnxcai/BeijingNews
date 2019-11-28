@@ -74,6 +74,10 @@ public class ContentFragment extends BaseFragment {
         basePagers.get(0).initData();
         isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
     }
+//得到新闻中心
+    public NewsCenterPager getNewsCenterPager() {
+        return (NewsCenterPager) basePagers.get(1);
+    }
 
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
 
