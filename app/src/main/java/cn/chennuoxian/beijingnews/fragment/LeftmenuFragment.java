@@ -13,7 +13,8 @@ import java.util.List;
 import cn.chennuoxian.beijingnews.R;
 import cn.chennuoxian.beijingnews.activity.MainActivity;
 import cn.chennuoxian.beijingnews.base.BaseFragment;
-import cn.chennuoxian.beijingnews.domain.NewsCenterPagerBean;
+
+import cn.chennuoxian.beijingnews.domain.NewsCenterPagerBean2;
 import cn.chennuoxian.beijingnews.pager.NewsCenterPager;
 import cn.chennuoxian.beijingnews.utils.DensityUtil;
 import cn.chennuoxian.beijingnews.utils.LogUtil;
@@ -21,7 +22,7 @@ import cn.chennuoxian.beijingnews.utils.LogUtil;
 public class LeftmenuFragment extends BaseFragment {
 
     private ListView listView;
-    private List<NewsCenterPagerBean.DataBean> data;
+    private List<NewsCenterPagerBean2.DataBean> data;
     private LeftmenuFragmentAdapter adapter;
     private int prePosition;
 
@@ -66,7 +67,7 @@ public class LeftmenuFragment extends BaseFragment {
         LogUtil.e("左侧菜单数据被初始化了");
     }
     //接收数据
-    public void setData(List<NewsCenterPagerBean.DataBean> data) {
+    public void setData(List<NewsCenterPagerBean2.DataBean> data) {
         this.data=data;
         for (int i=0;i<data.size();i++){
             LogUtil.e("title=="+data.get(i).getTitle());
