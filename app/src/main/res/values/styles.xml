@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--没有标题-->
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="bottom_tag_style" >
         <!-- Customize your theme here. -->

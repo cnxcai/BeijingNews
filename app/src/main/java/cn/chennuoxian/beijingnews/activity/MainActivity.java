@@ -33,7 +33,6 @@ public class MainActivity extends SlidingFragmentActivity {
         if(NavigationBarUtil.hasNavigationBar(this)){
             NavigationBarUtil.initActivity(findViewById(android.R.id.content));
         }
-
     }
 
     private void initSlidingMenu(){
