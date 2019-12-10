@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TabPageIndicator;
 
 import org.xutils.common.util.LogUtil;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.chennuoxian.beijingnews.R;
+import cn.chennuoxian.beijingnews.activity.MainActivity;
 import cn.chennuoxian.beijingnews.base.MenuDetailBasePager;
 import cn.chennuoxian.beijingnews.domain.NewsCenterPagerBean2;
 import cn.chennuoxian.beijingnews.menudetailpager.tabdetailpager.TabDetailPager;
@@ -33,6 +36,10 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
 
     @ViewInject(R.id.viewpager)
     private ViewPager viewPager;
+
+    @ViewInject(R.id.ib_tab_next)
+    private ImageButton ib_tab_next;
+
     //页签页面数据的集合
     private List<NewsCenterPagerBean2.DataBean.ChildrenBean> children;
     //页签页面的集合
@@ -47,6 +54,13 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
     public View initView() {
         View view=View.inflate(context, R.layout.newsmenu_detail_pager,null);
         x.view().inject(NewsMenuDetailPager.this,view);
+        //设置点击事件
+        ib_tab_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+            }
+        });
         return view;
     }
     @Override
@@ -64,7 +78,35 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
         //ViewPager和TabPageIndicator关联
         tabPageIndicator.setViewPager(viewPager);
         //注意以后监听页面的变化，TabPageIndicator监听变化
+        tabPageIndicator.setOnPageChangeListener(new MyOnPageChangeListener());
+    }
 
+    private void isEnableSlidingMenu(int touchmodeFullscreen){
+        MainActivity mainActivity=(MainActivity)context;
+        mainActivity.getSlidingMenu().setTouchModeAbove(touchmodeFullscreen);
+    }
+
+    class MyOnPageChangeListener implements ViewPager.OnPageChangeListener{
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (position==0){
+                //SlidingMenu可用全屏滑动
+                isEnableSlidingMenu(SlidingMenu.TOUCHMODE_FULLSCREEN);
+            }else {//SlidingMenu不可用全屏滑动
+                isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 
     class MyNewsMenuDetailPagerAdapter extends PagerAdapter{

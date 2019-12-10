@@ -3,6 +3,7 @@ package cn.chennuoxian.beijingnews.activity;
 import android.app.Activity;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,6 +24,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//设置没标题
         super.onCreate(savedInstanceState);
 
         initSlidingMenu();
